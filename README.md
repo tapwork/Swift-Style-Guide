@@ -58,8 +58,8 @@
 * Use guard to exit functions early.
 * Avoid force-unwraps and implicitly unwrapped optionals. They’re occasionally useful, but needing them constantly is usually a sign something is wrong.
 * Don’t repeat yourself. If you find you’ve written a very similar piece of code more than a couple of times, extract it into a function. Consider making that function a protocol extension.
-* Don't have too long methods - i.e. split up `viewDidLoad` or `init` in context specific setup/configure methods
-* Methods should cover only one use case (context). Don't handle two or more different things in one. Split it up.
+* Don't have too large methods - i.e. split up `viewDidLoad` or `init` in context specific setup/configure methods
+* Methods should cover only one specific use case (context). Don't handle two or more different things in one. Split it up.
 * Favor map and filter. But don’t force it: use a for loop when it makes sense. The purpose of higher-order functions is to make code more readable. An obfuscated use of reduce when a simple for loop would be clearer defeats this purpose.
 * Favor immutable variables: default to let unless you know you need mutation. But use mutation when it makes the code clearer or more efficient. Again, don’t force it: a mutating method on structs is often more idiomatic and efficient than returning a brand new struct.
 * Swift generics tend to lead to very long function signatures. Unfortunately, we have yet to settle on a good way of breaking up long function declarations into multiple lines. We’ll try to be consistent in how we do this in sample code.
@@ -431,6 +431,7 @@ class BoardLocation {
   }
 }
 ```
+Against the common rule, you can use `self` for properties to distinguish between properties and local `let`.
 
 ### Computed Properties
 

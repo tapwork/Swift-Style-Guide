@@ -20,6 +20,7 @@
 * [Comments](#comments)
 * [Classes and Structures](#classes-and-structures)
   * [Use of Self](#use-of-self)
+  * [UIViewController properties](#uiviewcontroller-properties)
   * [Protocol Conformance](#protocol-conformance)
   * [Computed Properties](#computed-properties)
   * [Final](#final)
@@ -413,7 +414,7 @@ The example above demonstrates the following style guidelines:
  + Indent getter and setter definitions and property observers.
  + Don't add modifiers such as `internal` when they're already the default. Similarly, don't repeat the access modifier when overriding a method.
 
-### UIViewController
+### UIViewController properties
 Use lazy for `UIView` properties instead of `?` optionals. Use `!` implicit optionals for `UIView` properties only when you are sure to create in `viewDidLoad` or `loadView`.
 
 **Preferred:**
@@ -429,6 +430,7 @@ class ViewController: UIViewController {
 ```
 
 You should not create views directly inlined in the property declaration.
+
 **Not Preferred:**
 ```swift
 class ViewController: UIViewController {

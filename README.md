@@ -353,6 +353,11 @@ Avoid block comments inline with code, as the code should be as self-documenting
 ## Classes and Structures
 
 ### Which one to use?
+Structs are preferred over to classes. Advantages of structs are:
+- Copied values instead of shared values when passing 
+- Better performance (direct dispatch instead of table dispatch or messaging)
+- No long inheritance chain possible
+- Less memory footprint issues (structs are values and live on the stack rather than on the heap like classes)
 
 Remember, structs have [value semantics](https://developer.apple.com/library/mac/documentation/Swift/Conceptual/Swift_Programming_Language/ClassesAndStructures.html#//apple_ref/doc/uid/TP40014097-CH13-XID_144). Use structs for things that do not have an identity. An array that contains [a, b, c] is really the same as another array that contains [a, b, c] and they are completely interchangeable. It doesn't matter whether you use the first array or the second, because they represent the exact same thing. That's why arrays are structs.
 
@@ -412,7 +417,7 @@ The example above demonstrates the following style guidelines:
 ### Use of Self
 
 For conciseness, avoid using `self` since Swift does not require it to access an object's properties or invoke its methods.
-
+There is one exception for not using `self`: You can use `self` for properties to distinguish between properties and a local `let`.
 Use `self` when required to differentiate between property names and arguments in initializers, and when referencing properties in closure expressions (as required by the compiler):
 
 ```swift
@@ -429,7 +434,6 @@ class BoardLocation {
   }
 }
 ```
-Against the common rule, you can use `self` for properties to distinguish between properties and local `let`.
 
 ### Computed Properties
 
@@ -585,7 +589,7 @@ radius * pi * 2 // is pi instance data or a global constant?
 
 ### Static Methods and Variable Type Properties
 
-Static methods and type properties work similarly to global functions and global variables and should be used sparingly. They are useful when functionality is scoped to a particular type or when Objective-C interoperability is required.
+Static methods and type properties work similarly to global functions and global variables and should be used sparingly. They are useful when functionality is scoped to a particular type or when Objective-C interoperability is required. As said above type properties are preferred over global constants.
 
 ### Optionals
 
@@ -668,6 +672,13 @@ private func makeLocationManager() -> CLLocationManager {
   return manager
 }
 ```
+
+or for view properties:
+
+```swift
+lazy var headerView = UIView()
+```
+
 
 **Notes:**
   - `[unowned self]` is not required here. A retain cycle is not created.

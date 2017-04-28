@@ -413,6 +413,27 @@ The example above demonstrates the following style guidelines:
  + Indent getter and setter definitions and property observers.
  + Don't add modifiers such as `internal` when they're already the default. Similarly, don't repeat the access modifier when overriding a method.
 
+### UIViewController
+Use lazy for `UIView` properties instead of `?` optionals. Use `!` implicit optionals for `UIView` properties only when you are sure to create in `viewDidLoad` or `loadView`.
+
+**Preferred:**
+```swift
+class ViewController: UIViewController {
+  lazy var view = UIView()
+```
+
+**Not Preferred:**
+```swift
+class ViewController: UIViewController {
+  var view: UIView?
+```
+
+You should not create views directly inlined in the property declaration.
+**Not Preferred:**
+```swift
+class ViewController: UIViewController {
+  let view = UIView()
+```
 
 ### Use of Self
 
@@ -676,7 +697,15 @@ private func makeLocationManager() -> CLLocationManager {
 or for view properties:
 
 ```swift
-lazy var headerView = UIView()
+class ViewController: UIViewController {
+   lazy var headerView = UIView()
+   
+   override func viewDidLoad() {
+       super.viewDidLoad()
+       
+       addSubView(self.headerView)
+   }
+}
 ```
 
 
